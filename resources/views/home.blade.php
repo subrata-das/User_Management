@@ -14,7 +14,11 @@
                         </div>
                     @endif
 
-                    You are logged in!
+                    <div class="alert alert-success" role="alert">
+                        Login Succcessfull ...
+                    </div>
+
+                    <strong>Redirecting...</strong>
                 </div>
             </div>
         </div>

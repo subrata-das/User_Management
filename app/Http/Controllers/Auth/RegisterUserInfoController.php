@@ -2,14 +2,14 @@
 
 namespace App\Http\Controllers\Auth;
 
-use App\User;
+// use App\User;
 use App\Http\Controllers\Controller;
-use Illuminate\Foundation\Auth\RegistersAdmins;
-use Illuminate\Support\Facades\Hash;
+use App\UserInfo;
+// use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
-// use Illuminate\Foundation\Auth\RegistersUsers;
+use Illuminate\Foundation\Auth\RegistersUsersInfo;
 
-class RegisterController extends Controller
+class RegisterUserInfoController extends Controller
 {
     /*
     |--------------------------------------------------------------------------
@@ -22,7 +22,7 @@ class RegisterController extends Controller
     |
     */
 
-    use RegistersAdmins;
+    use RegistersUsersInfo;
 
     /**
      * Where to redirect users after registration.
@@ -38,7 +38,7 @@ class RegisterController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('guest');
+        $this->middleware('auth');
     }
 
     /**
@@ -50,9 +50,13 @@ class RegisterController extends Controller
     protected function validator(array $data)
     {
         return Validator::make($data, [
-            'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'password' => ['required', 'string', 'min:6', 'confirmed'],
+            'mobile_no' => ['required', 'string', 'max:255'],
+            'image' => ['required'],
+            'DOB' => ['required'],
+            'address' => ['required', 'string',],
+            'city' => ['required', 'string', 'max:255'],
+            'state' => ['required', 'string', 'max:255'],
+            'country' => ['required', 'string', 'max:255'],
         ]);
     }
 
@@ -64,12 +68,15 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        return User::create([
-            'name' => $data['name'],
-            'email' => $data['email'],
-            'password' => Hash::make($data['password']),
-            'is_admin' => true,
-            'is_admin_unique' => false,
+        return UserInfo::create([
+            'mobile_no' => $data['mobile_no'],
+            'image' => $data['image'],
+            'DOB' => $data['DOB'],
+            'address' => $data['address'],
+            'city' => $data['city'],
+            'state' => $data['state'],
+            'country' => $data['country'],
+            'user_id' => $data['user_id'],
         ]);
     }
 }
