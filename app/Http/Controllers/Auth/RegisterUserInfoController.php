@@ -51,7 +51,7 @@ class RegisterUserInfoController extends Controller
     {
         return Validator::make($data, [
             'mobile_no' => ['required', 'string', 'max:255'],
-            'image' => ['required'],
+            'image' => ['required', 'mimes:jpeg,jpg,png,gif'],
             'DOB' => ['required'],
             'address' => ['required', 'string',],
             'city' => ['required', 'string', 'max:255'],
